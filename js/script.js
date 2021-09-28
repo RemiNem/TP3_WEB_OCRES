@@ -62,4 +62,48 @@ function update() {
       console.error(error);
     });
 
+    apiWeather.fetchThreeDaysForecast()
+    .then(function(response)
+    {
+
+      const data = response.data;
+
+
+      //juste pour recuperer les 3 premiers jours
+
+      for (let i = 1; i <= 3; i++) {
+        data.list[i - 1]['Index'] = i - 1;
+        const main = data.list[i - 1].weather[0].main;
+        const description = data.list[i - 1].weather[0].description;
+        const temp = data.list[i - 1].temp.day;
+
+        document.getElementById(`today-forecast-main-${i}`).innerHTML = main;
+        document.getElementById(`today-forecast-more-info-${i}`).innerHTML = description;
+        document.getElementById(`icon-weather-${i}`).className = getAnimation(main);
+        document.getElementById(`today-forecast-temp-${i}`).innerHTML = `${temp}°C`;
+    }
+    console.log(data);
+
+    let array = data.list;
+
+      // On récupère l'information principal
+      const main = data.weather[0].main;
+      const description = data.weather[0].description;
+      const temp = data.main.temp;
+      const icon = apiWeather.getHTMLElementFromIcon(data.weather[0].icon);
+
+      // Modifier le DOM
+      document.getElementById('today-forecast-main').innerHTML = main;
+      document.getElementById('today-forecast-more-info').innerHTML = description;
+      document.getElementById('icon-weather-container').innerHTML = icon;
+      document.getElementById('today-forecast-temp').innerHTML = `${temp}°C`;
+
+
+
+    });
+
+
+
+
+
 }
