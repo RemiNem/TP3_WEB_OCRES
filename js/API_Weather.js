@@ -23,14 +23,14 @@ class API_WEATHER {
   // Retourne une promise
   fetchTodayForecast() {
     return axios
-      .get(`${API_URL_3}?q=${this.city}&units=metric&appid=${API_KEY}`, {
+      .get(`${API_URL}?q=${this.city}&units=metric&appid=${API_KEY}`, {
         crossdomain: true
       })
   }
 
   fetchThreeDaysForecast() {
     return axios
-      .get(`${API_URL_FORECAST}?q=${this.city}&units=metric&cnt=3&appid=${API_KEY}`, {
+      .get(`${API_URL_3}?q=${this.city}&units=metric&cnt=3&appid=${API_KEY}`, {
         crossdomain: true
       });
 
